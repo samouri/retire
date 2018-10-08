@@ -1,0 +1,17 @@
+{
+  "name": "retire",
+  "reason": { "react-jsx": 2 },
+  "refmt": 3,
+  "sources": {
+    "dir" : "src",
+    "subdirs" : true
+  },
+  "package-specs": [{
+    "module": "commonjs",
+    "in-source": true
+  }],
+  "suffix": ".bs.js",
+  "namespace": true,
+  "bs-dependencies": [ "reason-react" ],
+  "merlin": false
+}

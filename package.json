@@ -1,0 +1,33 @@
+{
+  "name": "retire",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/Index.bs.js",
+  "esy": {
+    "buildsInSource": true
+  },
+
+  "scripts": {
+    "bsb": "bsb -w -make-world",
+    "pack": "fpack serve --dev -o build -n index.js src/index.bs.js",
+    "clean": "bsb -clean"
+  },
+
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "reason-react": ">=0.4.0"
+  },
+
+  "devDependencies": {
+    "fpack": "0.6.6",
+    "@esy-ocaml/reason": "*",
+    "@esy-ocaml/rtop": "*",
+    "bs-platform": "*",
+    "ocaml": "4.2.3005",
+    "victory": "^30.5.0"
+  },
+
+  "author": "Jake F. @samouri",
+  "license": "MIT"
+}
