@@ -1,4 +1,14 @@
-let component = ReasonReact.statelessComponent("App");
+type state = {
+  stockInput: string,
+  selectedStock: option(string),
+};
+
+type action =
+  | SetStockInput(string)
+  | AddStock(string)
+  | RemoveStock(string);
+
+let component = ReasonReact.reducerComponent("App");
 
 let xAxisFormatter = x => Js.Int.toString(x);
 
@@ -13,10 +23,31 @@ let data = [|
 
 let make = _children => {
   ...component,
-  render: _self =>
+  initialState: () => {selectedStock: None, stockInput: ""},
+  reducer: (action, state) =>
+    switch (action) {
+    | SetStockInput(v) => ReasonReact.Update({...state, stockInput: v})
+    | AddStock(stock) =>
+      ReasonReact.UpdateWithSideEffects(
+        {...state, selectedStock: Some(stock)},
+        (
+          _self => {
+            Api.getTimeSeriesWeekly(stock)
+            |> Js.Promise.then_(data => {
+                 Js.log(data);
+                 Js.Promise.resolve(data);
+               })
+            |> ignore;
+            ();
+          }
+        ),
+      )
+    | RemoveStock(_) => ReasonReact.Update({...state, selectedStock: None})
+    },
+  render: self =>
     <>
       <style>
-        (
+        {
           ReasonReact.string(
             {|
         body {
@@ -24,51 +55,66 @@ let make = _children => {
         }
       |},
           )
-        )
+        }
       </style>
       <Header />
-      <div style=(ReactDOMRe.Style.make(~display="flex", ()))>
+      <div style={ReactDOMRe.Style.make(~display="flex", ())}>
         <Sidebar />
         <div
-          style=(
+          style={
             ReactDOMRe.Style.make(
               ~display="flex",
               ~flexDirection="column",
               (),
             )
-          )>
-          <input
-            type_="search"
-            maxLength=60
-            placeholder="Search stocks"
-            style=(
-              ReactDOMRe.Style.make(
-                ~display="flex",
-                ~border="0",
-                ~margin="0",
-                ~padding="0",
-                ~paddingLeft="60px",
-                ~width="100%",
-                ~height="65px",
-                ~maxWidth="500px",
-                ~fontSize="30px",
-                ~fontWeight="300",
-                ~background="transparent",
-                ~outline="none",
-                ~color="#f0f0f0",
-                (),
-              )
-            )
-          />
+          }>
+          <form
+            onSubmit={
+              event => {
+                ReactEvent.Form.preventDefault(event);
+                Js.log(ReactEvent.Form.target(event));
+                self.send(AddStock(self.state.stockInput));
+              }
+            }>
+            <input
+              type_="search"
+              maxLength=60
+              placeholder="Search stocks"
+              onChange={
+                event =>
+                  self.send(
+                    SetStockInput(ReactEvent.Form.target(event)##value),
+                  )
+              }
+              style={
+                ReactDOMRe.Style.make(
+                  ~display="flex",
+                  ~border="0",
+                  ~margin="0",
+                  ~padding="0",
+                  ~paddingLeft="60px",
+                  ~width="100%",
+                  ~height="65px",
+                  ~maxWidth="500px",
+                  ~fontSize="30px",
+                  ~fontWeight="300",
+                  ~background="transparent",
+                  ~outline="none",
+                  ~color="#f0f0f0",
+                  (),
+                )
+              }
+            />
+          </form>
           <div
-            style=(
+            style={
               ReactDOMRe.Style.make(
                 ~display="flex",
                 ~height="500px",
                 ~paddingLeft="20px",
                 (),
               )
-            )>
+            }>
             Victory.(
               <VictoryChart domainPadding=20 theme=VictoryTheme.material>
                 <VictoryAxis

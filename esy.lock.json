@@ -1,5 +1,5 @@
 {
-  "hash": "a59fce92ece9fef3e50c75c2fd13dcea",
+  "hash": "de78e8526942bfbe9dca5f6e8719f67d",
   "root": "retire@path:.",
   "node": {
     "victory-zoom-container@30.3.1": {
@@ -385,7 +385,7 @@
         "opam": null
       },
       "dependencies": [
-        "@esy-ocaml/reason@3.3.3", "@esy-ocaml/rtop@3.3.0",
+        "@esy-ocaml/reason@3.3.3", "@esy-ocaml/rtop@3.3.0", "bs-fetch@0.3.0",
         "bs-platform@4.0.6", "fpack@0.6.6", "ocaml@4.2.3005", "react@16.5.2",
         "react-dom@16.5.2", "reason-react@0.5.3", "victory@30.5.0"
       ]
@@ -670,6 +670,17 @@
         "version": "4.0.6",
         "source":
           "archive:https://registry.npmjs.org/bs-platform/-/bs-platform-4.0.6.tgz#sha1:e7f156c77ad3efafb0c0291b41dcf1b06f93c192",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "bs-fetch@0.3.0": {
+      "record": {
+        "name": "bs-fetch",
+        "version": "0.3.0",
+        "source":
+          "archive:https://registry.npmjs.org/bs-fetch/-/bs-fetch-0.3.0.tgz#sha1:60c64457359d0c7e0798d5a04db8987d16c4f8f3",
         "files": [],
         "opam": null
       },

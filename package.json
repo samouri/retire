@@ -24,6 +24,7 @@
     "@esy-ocaml/reason": "*",
     "@esy-ocaml/rtop": "*",
     "bs-platform": "*",
+    "bs-fetch": "*",
     "ocaml": "4.2.3005",
     "victory": "^30.5.0"
   },
