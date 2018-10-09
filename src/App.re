@@ -1,12 +1,15 @@
+type stockData = Belt.Map.String.t(array((string, float)));
 type state = {
   stockInput: string,
+  stockData,
   selectedStock: option(string),
 };
 
 type action =
   | SetStockInput(string)
   | AddStock(string)
-  | RemoveStock(string);
+  | RemoveStock(string)
+  | AddStockData(string, array((string, float)));
 
 let component = ReasonReact.reducerComponent("App");
 
@@ -23,23 +26,30 @@ let data = [|
 
 let make = _children => {
   ...component,
-  initialState: () => {selectedStock: None, stockInput: ""},
+  initialState: () => {
+    selectedStock: None,
+    stockInput: "",
+    stockData: Belt.Map.String.empty,
+  },
   reducer: (action, state) =>
     switch (action) {
     | SetStockInput(v) => ReasonReact.Update({...state, stockInput: v})
-    | AddStock(stock) =>
+    | AddStockData(symbol, stockData) =>
+      ReasonReact.Update({
+        ...state,
+        stockData: Belt.Map.String.set(state.stockData, symbol, stockData),
+      })
+    | AddStock(symbol) =>
       ReasonReact.UpdateWithSideEffects(
-        {...state, selectedStock: Some(stock)},
+        {...state, selectedStock: Some(symbol)},
         (
-          _self => {
-            Api.getTimeSeriesWeekly(stock)
+          _self =>
+            Api.getTimeSeriesWeeklyCloseValues(symbol)
             |> Js.Promise.then_(data => {
-                 Js.log(data);
-                 Js.Promise.resolve(data);
+                 _self.send(AddStockData(symbol, data));
+                 Js.Promise.resolve();
                })
-            |> ignore;
-            ();
-          }
+            |> ignore
         ),
       )
     | RemoveStock(_) => ReasonReact.Update({...state, selectedStock: None})
