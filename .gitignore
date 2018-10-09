@@ -3,3 +3,5 @@ node_modules
 src/*.bs.js
 build
 ApiKey*
+.bsb.lock
+.merlin
