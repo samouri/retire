@@ -1,39 +1,31 @@
-type stockData = Belt.Map.String.t(array((string, float)));
+type stockData = Belt.Map.String.t(array(Victory.victoryData));
 type state = {
-  stockInput: string,
   stockData,
   selectedStock: option(string),
 };
 
+let deoptStr = str =>
+  switch (str) {
+  | None => ""
+  | Some(s) => s
+  };
+
 type action =
-  | SetStockInput(string)
   | AddStock(string)
   | RemoveStock(string)
-  | AddStockData(string, array((string, float)));
+  | AddStockData(string, array(Victory.victoryData));
 
 let component = ReasonReact.reducerComponent("App");
 
-let xAxisFormatter = x => Js.Int.toString(x);
-
-let yAxisFormatter = y => Js.Int.toString(y / 1000) ++ "k";
-
-let data = [|
-  {"x": 2015, "y": 13000},
-  {"x": 2016, "y": 16500},
-  {"x": 2017, "y": 14250},
-  {"x": 2018, "y": 19000},
-|];
+let xAxisFormatter = (x: float) =>
+  Js.Date.fromFloat(x) |> Js.Date.toLocaleDateString;
+let yAxisFormatter = y => Js.Int.toString(y);
 
 let make = _children => {
   ...component,
-  initialState: () => {
-    selectedStock: None,
-    stockInput: "",
-    stockData: Belt.Map.String.empty,
-  },
+  initialState: () => {selectedStock: None, stockData: Belt.Map.String.empty},
   reducer: (action, state) =>
     switch (action) {
-    | SetStockInput(v) => ReasonReact.Update({...state, stockInput: v})
     | AddStockData(symbol, stockData) =>
       ReasonReact.Update({
         ...state,
@@ -54,7 +46,13 @@ let make = _children => {
       )
     | RemoveStock(_) => ReasonReact.Update({...state, selectedStock: None})
     },
-  render: self =>
+  render: self => {
+    let selectedStock = deoptStr(self.state.selectedStock);
+    let data: array(Victory.victoryData) =
+      switch (Belt.Map.String.get(self.state.stockData, selectedStock)) {
+      | None => [||]
+      | Some(s) => s
+      };
     <>
       <style>
         {
@@ -78,44 +76,7 @@ let make = _children => {
               (),
             )
           }>
-          <form
-            onSubmit={
-              event => {
-                ReactEvent.Form.preventDefault(event);
-                Js.log(ReactEvent.Form.target(event));
-                self.send(AddStock(self.state.stockInput));
-              }
-            }>
-            <input
-              type_="search"
-              maxLength=60
-              placeholder="Search stocks"
-              onChange={
-                event =>
-                  self.send(
-                    SetStockInput(ReactEvent.Form.target(event)##value),
-                  )
-              }
-              style={
-                ReactDOMRe.Style.make(
-                  ~display="flex",
-                  ~border="0",
-                  ~margin="0",
-                  ~padding="0",
-                  ~paddingLeft="60px",
-                  ~width="100%",
-                  ~height="65px",
-                  ~maxWidth="500px",
-                  ~fontSize="30px",
-                  ~fontWeight="300",
-                  ~background="transparent",
-                  ~outline="none",
-                  ~color="#f0f0f0",
-                  (),
-                )
-              }
-            />
-          </form>
+          <SymbolSearch onSubmit={symbol => self.send(AddStock(symbol))} />
           <div
             style={
               ReactDOMRe.Style.make(
@@ -126,11 +87,20 @@ let make = _children => {
               )
             }>
             Victory.(
-              <VictoryChart domainPadding=20 theme=VictoryTheme.material>
-                <VictoryAxis
-                  tickValues=[|2015, 2016, 2017, 2018|]
-                  tickFormat=xAxisFormatter
-                />
+              <VictoryChart
+                containerComponent={
+                  <VictoryCursorContainer
+                    cursorLabel={
+                      (x: Victory.victoryData) =>
+                        x->Victory.xGet |> float_of_int |> xAxisFormatter
+                    }
+                    cursorDimension="x"
+                  />
+                }
+                domainPadding=20
+                theme=VictoryTheme.material
+                width=1000>
+                <VictoryAxis tickFormat=xAxisFormatter />
                 <VictoryAxis dependentAxis=true tickFormat=yAxisFormatter />
                 <VictoryLine data />
               </VictoryChart>
@@ -138,5 +108,6 @@ let make = _children => {
           </div>
         </div>
       </div>
-    </>,
+    </>;
+  },
 };
