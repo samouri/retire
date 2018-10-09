@@ -30,49 +30,24 @@ let endpoint =
      }
    }; */
 
-let decodeObj = json =>
-  switch (Js.Json.decodeObject(json)) {
-  | None => Js.Dict.empty()
-  | Some(d) => d
-  };
-
-let decodeStr = json =>
-  switch (Js.Json.decodeString(json)) {
-  | None => ""
-  | Some(s) => s
-  };
-
-type timeSeriesWeeklyCloseValues = array((string, float));
-external myShadyConversion:
-  array((Js.Dict.key, float)) => timeSeriesWeeklyCloseValues =
-  "%identity";
+type timeSeriesWeeklyCloseValues = array(Victory.victoryData);
 let getTimeSeriesWeeklyCloseValues =
     (symbol: string): Js.Promise.t(timeSeriesWeeklyCloseValues) => {
   let uri = endpoint ++ "function=TIME_SERIES_WEEKLY&symbol=" ++ symbol;
-  Js.Promise.(
-    Fetch.fetch(uri)
-    |> then_(Fetch.Response.text)
-    |> then_(s => Js.Promise.resolve(Js_json.parseExn(s)))
-    |> then_((json: Js.Json.t) => {
-         let obj = decodeObj(json);
-         let timeSeries = Js.Dict.get(obj, "Weekly Time Series");
-         let transformed: timeSeriesWeeklyCloseValues =
-           switch (timeSeries) {
-           | None => [||]
-           | Some(ts) =>
-             let intVer =
-               Js.Dict.map(
-                 (. x) => {
-                   let _ = Js.log(x);
-                   decodeObj(x)->Js.Dict.unsafeGet("4. close")
-                   |> decodeStr
-                   |> float_of_string
-                 },
-                 decodeObj(ts),
-               );
-             intVer |> Js.Dict.entries |> myShadyConversion;
-           };
-         Js.Promise.resolve(transformed);
-       })
-  );
+  Js.log(uri);
+  let ret: Js.Promise.t(timeSeriesWeeklyCloseValues) = [%bs.raw
+    {|
+      fetch(uri)
+        .then(res => res.json())
+        .then(res => res["Weekly Time Series"])
+        .then(ts =>
+          Object.entries(ts).map(x => {
+            const date = + new Date(x[0]);
+            let closeValue = parseFloat(x[1]['4. close'], 10);
+            return {x: date, y: closeValue};
+          })
+        )
+    |}
+  ];
+  ret;
 };
