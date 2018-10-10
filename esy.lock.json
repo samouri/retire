@@ -1,7 +1,18 @@
 {
-  "hash": "de78e8526942bfbe9dca5f6e8719f67d",
+  "hash": "4e4deb276f9aad35954e5e1729ded233",
   "root": "retire@path:.",
   "node": {
+    "wordwrap@0.0.3": {
+      "record": {
+        "name": "wordwrap",
+        "version": "0.0.3",
+        "source":
+          "archive:https://registry.npmjs.org/wordwrap/-/wordwrap-0.0.3.tgz#sha1:a3d5da6cd5c0bc0008d37234bbaf1bed63059107",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
     "victory-zoom-container@30.3.1": {
       "record": {
         "name": "victory-zoom-container",
@@ -365,6 +376,28 @@
         "victory-zoom-container@30.3.1"
       ]
     },
+    "url-join@2.0.5": {
+      "record": {
+        "name": "url-join",
+        "version": "2.0.5",
+        "source":
+          "archive:https://registry.npmjs.org/url-join/-/url-join-2.0.5.tgz#sha1:5af22f18c052a000a48d7b82c5e9c2e2feeda728",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "union@0.4.6": {
+      "record": {
+        "name": "union",
+        "version": "0.4.6",
+        "source":
+          "archive:https://registry.npmjs.org/union/-/union-0.4.6.tgz#sha1:198fbdaeba254e788b0efcb630bc11f24a2959e0",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [ "qs@2.3.3" ]
+    },
     "schedule@0.5.0": {
       "record": {
         "name": "schedule",
@@ -386,9 +419,21 @@
       },
       "dependencies": [
         "@esy-ocaml/reason@3.3.3", "@esy-ocaml/rtop@3.3.0", "bs-fetch@0.3.0",
-        "bs-platform@4.0.6", "fpack@0.6.6", "ocaml@4.2.3005", "react@16.5.2",
-        "react-dom@16.5.2", "reason-react@0.5.3", "victory@30.5.0"
+        "bs-platform@4.0.6", "fpack@0.6.6", "http-server@0.11.1",
+        "ocaml@4.2.3005", "react@16.5.2", "react-dom@16.5.2",
+        "reason-react@0.5.3", "victory@30.5.0"
       ]
+    },
+    "requires-port@1.0.0": {
+      "record": {
+        "name": "requires-port",
+        "version": "1.0.0",
+        "source":
+          "archive:https://registry.npmjs.org/requires-port/-/requires-port-1.0.0.tgz#sha1:925d2601d39ac485e091cf0da5c6e694dc3dcaff",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
     },
     "reason-react@0.5.3": {
       "record": {
@@ -440,6 +485,17 @@
         "schedule@0.5.0"
       ]
     },
+    "qs@2.3.3": {
+      "record": {
+        "name": "qs",
+        "version": "2.3.3",
+        "source":
+          "archive:https://registry.npmjs.org/qs/-/qs-2.3.3.tgz#sha1:e9e85adbe75da0bbe4c8e0476a086290f863b404",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
     "prop-types@15.6.2": {
       "record": {
         "name": "prop-types",
@@ -450,6 +506,39 @@
         "opam": null
       },
       "dependencies": [ "loose-envify@1.4.0", "object-assign@4.1.1" ]
+    },
+    "portfinder@1.0.17": {
+      "record": {
+        "name": "portfinder",
+        "version": "1.0.17",
+        "source":
+          "archive:https://registry.npmjs.org/portfinder/-/portfinder-1.0.17.tgz#sha1:a8a1691143e46c4735edefcf4fbcccedad26456a",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [ "async@1.5.2", "debug@2.6.9", "mkdirp@0.5.1" ]
+    },
+    "optimist@0.6.1": {
+      "record": {
+        "name": "optimist",
+        "version": "0.6.1",
+        "source":
+          "archive:https://registry.npmjs.org/optimist/-/optimist-0.6.1.tgz#sha1:da3ea74686fa21a19a111c326e90eb15a0196686",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [ "minimist@0.0.10", "wordwrap@0.0.3" ]
+    },
+    "opener@1.4.3": {
+      "record": {
+        "name": "opener",
+        "version": "1.4.3",
+        "source":
+          "archive:https://registry.npmjs.org/opener/-/opener-1.4.3.tgz#sha1:5c6da2c5d7e5831e8ffa3964950f8d6674ac90b8",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
     },
     "ocaml@4.2.3005": {
       "record": {
@@ -468,6 +557,72 @@
         "version": "4.1.1",
         "source":
           "archive:https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz#sha1:2109adc7965887cfc05cbbd442cac8bfbb360863",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "ms@2.0.0": {
+      "record": {
+        "name": "ms",
+        "version": "2.0.0",
+        "source":
+          "archive:https://registry.npmjs.org/ms/-/ms-2.0.0.tgz#sha1:5608aeadfc00be6c2901df5f9861788de0d597c8",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "mkdirp@0.5.1": {
+      "record": {
+        "name": "mkdirp",
+        "version": "0.5.1",
+        "source":
+          "archive:http://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz#sha1:30057438eac6cf7f8c4767f38648d6697d75c903",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [ "minimist@0.0.8" ]
+    },
+    "minimist@1.2.0": {
+      "record": {
+        "name": "minimist",
+        "version": "1.2.0",
+        "source":
+          "archive:http://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz#sha1:a35008b20f41383eec1fb914f4cd5df79a264284",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "minimist@0.0.10": {
+      "record": {
+        "name": "minimist",
+        "version": "0.0.10",
+        "source":
+          "archive:http://registry.npmjs.org/minimist/-/minimist-0.0.10.tgz#sha1:de3f98543dbf96082be48ad1a0c7cda836301dcf",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "minimist@0.0.8": {
+      "record": {
+        "name": "minimist",
+        "version": "0.0.8",
+        "source":
+          "archive:http://registry.npmjs.org/minimist/-/minimist-0.0.8.tgz#sha1:857fcabfc3397d2625b8228262e86aa7a011b05d",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "mime@1.6.0": {
+      "record": {
+        "name": "mime",
+        "version": "1.6.0",
+        "source":
+          "archive:https://registry.npmjs.org/mime/-/mime-1.6.0.tgz#sha1:32cd9e5c64553bd58d19a568af452acff04981b1",
         "files": [],
         "opam": null
       },
@@ -506,6 +661,46 @@
       },
       "dependencies": []
     },
+    "http-server@0.11.1": {
+      "record": {
+        "name": "http-server",
+        "version": "0.11.1",
+        "source":
+          "archive:https://registry.npmjs.org/http-server/-/http-server-0.11.1.tgz#sha1:2302a56a6ffef7f9abea0147d838a5e9b6b6a79b",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [
+        "colors@1.0.3", "corser@2.0.1", "ecstatic@3.3.0",
+        "http-proxy@1.17.0", "opener@1.4.3", "optimist@0.6.1",
+        "portfinder@1.0.17", "union@0.4.6"
+      ]
+    },
+    "http-proxy@1.17.0": {
+      "record": {
+        "name": "http-proxy",
+        "version": "1.17.0",
+        "source":
+          "archive:https://registry.npmjs.org/http-proxy/-/http-proxy-1.17.0.tgz#sha1:7ad38494658f84605e2f6db4436df410f4e5be9a",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [
+        "eventemitter3@3.1.0", "follow-redirects@1.5.9",
+        "requires-port@1.0.0"
+      ]
+    },
+    "he@1.2.0": {
+      "record": {
+        "name": "he",
+        "version": "1.2.0",
+        "source":
+          "archive:https://registry.npmjs.org/he/-/he-1.2.0.tgz#sha1:84ae65fa7eafb165fddb61566ae14baf05664f0f",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
     "fpack@0.6.6": {
       "record": {
         "name": "fpack",
@@ -516,6 +711,63 @@
         "opam": null
       },
       "dependencies": []
+    },
+    "follow-redirects@1.5.9": {
+      "record": {
+        "name": "follow-redirects",
+        "version": "1.5.9",
+        "source":
+          "archive:https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.5.9.tgz#sha1:c9ed9d748b814a39535716e531b9196a845d89c6",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [ "debug@3.1.0" ]
+    },
+    "eventemitter3@3.1.0": {
+      "record": {
+        "name": "eventemitter3",
+        "version": "3.1.0",
+        "source":
+          "archive:https://registry.npmjs.org/eventemitter3/-/eventemitter3-3.1.0.tgz#sha1:090b4d6cdbd645ed10bf750d4b5407942d7ba163",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "ecstatic@3.3.0": {
+      "record": {
+        "name": "ecstatic",
+        "version": "3.3.0",
+        "source":
+          "archive:https://registry.npmjs.org/ecstatic/-/ecstatic-3.3.0.tgz#sha1:91cd417d152abf85b37b1ab3ebf3bd25cdc64e80",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [
+        "he@1.2.0", "mime@1.6.0", "minimist@1.2.0", "url-join@2.0.5"
+      ]
+    },
+    "debug@3.1.0": {
+      "record": {
+        "name": "debug",
+        "version": "3.1.0",
+        "source":
+          "archive:https://registry.npmjs.org/debug/-/debug-3.1.0.tgz#sha1:5bb5a0672628b64149566ba16819e61518c67261",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [ "ms@2.0.0" ]
+    },
+    "debug@2.6.9": {
+      "record": {
+        "name": "debug",
+        "version": "2.6.9",
+        "source":
+          "archive:https://registry.npmjs.org/debug/-/debug-2.6.9.tgz#sha1:5d128515df134ff327e90a4c93f4e077a536341f",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": [ "ms@2.0.0" ]
     },
     "d3-voronoi@1.1.4": {
       "record": {
@@ -664,6 +916,28 @@
       },
       "dependencies": []
     },
+    "corser@2.0.1": {
+      "record": {
+        "name": "corser",
+        "version": "2.0.1",
+        "source":
+          "archive:https://registry.npmjs.org/corser/-/corser-2.0.1.tgz#sha1:8eda252ecaab5840dcd975ceb90d9370c819ff87",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "colors@1.0.3": {
+      "record": {
+        "name": "colors",
+        "version": "1.0.3",
+        "source":
+          "archive:https://registry.npmjs.org/colors/-/colors-1.0.3.tgz#sha1:0433f44d809680fdeb60ed260f1b0c262e82a40b",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
     "bs-platform@4.0.6": {
       "record": {
         "name": "bs-platform",
@@ -681,6 +955,17 @@
         "version": "0.3.0",
         "source":
           "archive:https://registry.npmjs.org/bs-fetch/-/bs-fetch-0.3.0.tgz#sha1:60c64457359d0c7e0798d5a04db8987d16c4f8f3",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "async@1.5.2": {
+      "record": {
+        "name": "async",
+        "version": "1.5.2",
+        "source":
+          "archive:http://registry.npmjs.org/async/-/async-1.5.2.tgz#sha1:ec6a61ae56480c0c3cb241c95618e20892f9672a",
         "files": [],
         "opam": null
       },
