@@ -1,4 +1,4 @@
 ReactDOMRe.renderToElementWithId(
-  <AppState.Provider>
-  <App />
-  </AppState.Provider>, "app");
+  <AppState.Provider> <App /> </AppState.Provider>,
+  "app",
+);
