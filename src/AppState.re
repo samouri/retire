@@ -19,6 +19,8 @@ module AppStateContext =
     let defaultValue = defaultValue;
   });
 
+module WebStorage = {};
+
 module Provider = {
   type state = {
     symbolData,
@@ -33,8 +35,8 @@ module Provider = {
   let make = children => {
     ...component,
     initialState: () => {
-        selectedSymbol: None,
-        symbolData: Belt.Map.String.empty,
+      symbolData: Belt.Map.String.empty,
+      selectedSymbol: None,
     },
     reducer: (action: action, state: state) =>
       switch (action) {
@@ -45,23 +47,28 @@ module Provider = {
             Belt.Map.String.set(state.symbolData, symbol, symbolData),
         })
       | SelectSymbol(symbol) =>
-        ReasonReact.UpdateWithSideEffects(
-          {...state, selectedSymbol: Some(symbol)},
-          (
-            _self =>
-              Api.getTimeSeriesWeeklyCloseValues(symbol)
-              |> Js.Promise.then_(data => {
-                   _self.send(UpsertSymbolData(symbol, data));
-                   Js.Promise.resolve();
-                 })
-              |> ignore
-          ),
-        )
+        if (symbol == "") {
+          ReasonReact.Update({...state, selectedSymbol: None});
+        } else {
+          ReasonReact.UpdateWithSideEffects(
+            {...state, selectedSymbol: Some(symbol)},
+            (
+              _self =>
+                Api.getTimeSeriesWeeklyCloseValues(symbol)
+                |> Js.Promise.then_(data => {
+                     _self.send(UpsertSymbolData(symbol, data));
+                     Js.Promise.resolve();
+                   })
+                |> ignore
+            ),
+          );
+        }
       },
     render: self =>
       <AppStateContext.Provider
         value={
-          ...self.state,
+          symbolData: self.state.symbolData,
+          selectedSymbol: self.state.selectedSymbol,
           upsertSymbolData: (symbol, data) =>
             self.send(UpsertSymbolData(symbol, data)),
           selectSymbol: symbol => self.send(SelectSymbol(symbol)),
