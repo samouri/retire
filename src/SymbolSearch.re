@@ -8,7 +8,7 @@ let component = ReasonReact.reducerComponent("SymbolSearch");
 let make = (~onSubmit, _children) => {
   ...component,
   initialState: () => {symbolInput: ""},
-  reducer: (action, state) =>
+  reducer: (action, _state) =>
     switch (action) {
     | SymbolChange(v) => ReasonReact.Update({symbolInput: v})
     },
