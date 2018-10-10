@@ -10,6 +10,7 @@
   "scripts": {
     "bsb": "bsb -w -make-world",
     "pack": "fpack serve --dev -o build -n index.js src/index.bs.js",
+    "serve": "cp src/ServiceWorker.bs.js build/ && http-server build",
     "clean": "bsb -clean"
   },
 

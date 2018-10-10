@@ -19,8 +19,6 @@ module AppStateContext =
     let defaultValue = defaultValue;
   });
 
-module WebStorage = {};
-
 module Provider = {
   type state = {
     symbolData,
