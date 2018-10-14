@@ -10,7 +10,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-// how the heck do i do this reasonable for prod?
+// gets auto-filled by workbox-cli
 workbox.precaching.precacheAndRoute([]);
 
 workbox.routing.registerRoute(
