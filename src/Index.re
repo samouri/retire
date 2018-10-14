@@ -5,8 +5,10 @@ ReactDOMRe.renderToElementWithId(
 
 [%%bs.raw {|
   if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./ServiceWorker.bs.js')
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('./ServiceWorker.js')
         .then(reg => console.log('Service worker succesfully registered', reg))
         .catch(err => console.error('Error registering service worker', err));
+    });
   }
 |}];
